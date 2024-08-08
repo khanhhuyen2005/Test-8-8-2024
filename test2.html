@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            border: 2px solid #ff8400;
+            background-color: #fce3c8; 
+            padding: 10px;
+            align-items: center;
+        }
+
+        .head-left {
+            display: flex;
+            flex-direction: row;
+        }
+        .header  .one{
+            border: 2px solid #d48bf5;
+            background-color: #ecc4fe;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            margin-left: 30px;
+        }
+
+        .head-left h2 {
+            margin: 0;
+            margin-top: 8px;
+            font-family: sans-serif;
+            font-size: 20px;
+        }
+        
+
+        .head-right  a{
+            text-decoration: none;
+            padding: 10px 20px;
+            color: #101010;
+            border-radius: 4px;
+            font-family: sans-serif;
+        }
+
+        .head-right :hover {
+            border: 1px solid #009dff;
+            background-color: #95bcf0;
+        }
+
+        .header .nav-bars {
+            display: none;
+            
+        }
+
+        @media (max-width: 1023px) {
+            .header .nav-bars {
+                display: block;
+            }
+
+            .head-right {
+                display: none;
+            }
+        }
+
+        .header .nav-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+
+        .header .nav-mobile {
+            position: fixed;
+            top: 5px;
+            right: 0;
+            bottom: 0;
+            width: 320px;
+            max-width: 100%;
+            background-color: #ffffff;
+            transform: translateX(100%);
+            transition: transform linear 0.2s;
+        }
+
+        .header .nav-mobile-link{
+            text-decoration: none;
+            padding: 10px 20px;
+            color: #101010;
+            border-radius: 4px;
+            font-family: sans-serif;
+            display: block;
+        }
+
+        .header .nav-mobile-close {
+            position: absolute;
+            font-size: 25px;
+            color: #898686;
+            top: 10px;
+            right: 20px;
+        }
+
+        .nav-input:checked ~ .nav-overlay {
+            display: block;
+        }
+
+        .nav-input {
+            display: none;
+        }
+
+        .nav-input:checked ~ .nav-mobile {
+            transform: translateX(0%);
+        }
+
+        .body {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .body .product {
+            display: flex;
+            flex-direction: column;
+            flex: 150%;
+            margin-left: 40px;
+            margin-right: 80px;
+        }
+
+        .body .product .main-product img {
+            width: 100%;
+            height: 400px;
+            margin-top: 30px;
+            margin-bottom: 40px;
+            border: 2px solid #5f5e5e;
+        }
+
+        .body .product .similar-product {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .body .product .similar-product img {
+            width: 140px;
+            border: 2px solid #5f5e5e;
+            margin-bottom: 20px;
+        }
+
+        .body .inducere {
+            margin-top: 20px;
+            margin-right: 40px;
+        }
+
+        .body .inducere h2 {
+            font-family: sans-serif;
+            font-size: 30px;
+        }
+
+        .body .inducere p {
+            font-family: sans-serif;
+            font-size: 18px;
+            line-height: 25px;
+        }
+
+        .body .inducere h3 {
+            font-family: sans-serif;
+        }
+
+        .body .inducere button {
+            padding: 7px 23px;
+            border: 2px solid #3c3c3c;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .body .inducere button:hover {
+            border-color: #0490a9;
+            background-color: #03d3d7;
+        }
+
+        .body .inducere .price {
+            display: flex;
+            margin-top: 10px;
+            margin-bottom: -15px;
+        }
+
+        .body .inducere .price p {
+            color: #3c00ff;
+            margin-left: 60px;
+        }
+
+        .body .inducere .rating {
+            margin-top: -1;
+        }
+
+        .body .inducere .discount {
+            display: flex;
+            margin-bottom: -15px;
+        } 
+
+        .body .inducere .discount p {
+            color: #f71616;
+            margin-left: 25px;
+        }
+
+        .body .inducere .in-stocks {
+            display: flex;
+            margin-top: -10px;
+        }
+
+        .body .inducere .in-stocks p {
+            color: #3c00ff;
+            margin-left: 20px;
+        }
+
+        .body .inducere .order {
+            display: flex;
+        }
+
+        .body .inducere .order .quantity input {
+            padding: 10px ;
+            width: 50px;
+            border: 2px solid #a19f9f; 
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+
+        .body .inducere .order button {
+            padding: 10px 15px; 
+            border: 2px solid #f99fae;
+            background-color: #f8c4cc;
+        }
+
+        .body .inducere .order button:hover {
+            background-color: #f81919;
+        }
+
+        .comment {
+            margin-left: 40px;
+            font-family: sans-serif;
+        }
+
+        .comment .customer {
+            border: 2px solid;
+            margin-bottom: 20px;
+            padding-left: 15px;
+        }
+
+        .comment .customer-1 {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .comment .info {
+            display: flex;
+        }
+
+        .comment .avatar-customer {
+            border: 2px solid #d48bf5;
+            background-color: #ecc4fe;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            margin-right: 10px;
+            margin-left: 10px;
+            margin-top: 15px;   
+        }
+
+        .comment .name {
+            line-height: 3px;
+            margin-bottom: -10px;
+        }
+
+        .comment .name p {
+            color: #a6a6a6;
+        }
+
+        .comment .evaluate {
+            margin-top: 20px;
+            margin-right: 20px;
+            color: #e3e306;
+            font-size: 20px;
+        }
+
+        .comment .opinion {
+            margin-left: 20px;
+        }
+
+        .page {
+            display: flex;
+            margin-left: 40px;
+        }
+
+        .page button {
+            padding: 10px 15px;
+            border: 2px solid #a5a5a5;
+            border-radius: 4px;
+            font-size: 15px; 
+            margin-right: 20px;
+            margin-bottom: 40px;
+        }
+
+        .footer{
+            border: 2px solid #ff8400;
+            background-color: #fce3c8; 
+            padding: 10px 0 0 60px;
+        }
+
+        .footer h2 {
+            margin: 0;
+        }
+
+        .footer .contact {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .footer .contact div {
+            margin-right: 50px;
+        }
+
+        .footer .contact i {
+            font-size: 20px;
+            padding-right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <section>
+        <form action="">
+            <div class="container">
+                <div class="header">
+                    <div class="head-left">
+                        <div class="one"></div>
+                        <div><h2>My Shop</h2></div>
+                    </div>
+                    <nav class="nav-pc">
+                        <div class="head-right">
+                            <a href="#">Home</a>
+                            <a href="#">About us</a>
+                            <a href="#">Contact</a>
+                            <a href="#">My Cart</a>
+                        </div>
+                    </nav>
+                    <label class="nav-bars" for="nav-mobile-input"><i class="fa fa-bars"></i></label>
+    
+                    <input type="checkbox" 
+                    class="nav-input" id="nav-mobile-input" >
+                    <label class="nav-overlay" for="nav-mobile-input"></label>
+    
+                    <nav class="nav-mobile">
+                        <div class="head-right-mobile">
+                            <a href="#" class="nav-mobile-link">Home</a>
+                            <a href="#" class="nav-mobile-link">About us</a>
+                            <a href="#" class="nav-mobile-link">Contact</a>
+                            <a href="#" class="nav-mobile-link">My Cart</a>
+                        </div>
+                        <label class="nav-mobile-close"  for="nav-mobile-input"><i class="fas fa-times"></i></label>
+                    </nav>
+                </div>
+    
+                <div class="body">
+                    <div class="product">
+                        <div class="main-product">
+                            <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQBn68qcHfNe7f_8OZ1vQn0uhJkLs7Im0oI10LNrVtwxIdjXbGM" alt="">
+                        </div>
+                        <div class="similar-product">
+                            <div><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQBn68qcHfNe7f_8OZ1vQn0uhJkLs7Im0oI10LNrVtwxIdjXbGM" alt=""></div>
+                            <div><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQBn68qcHfNe7f_8OZ1vQn0uhJkLs7Im0oI10LNrVtwxIdjXbGM" alt=""></div>
+                            <div><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQBn68qcHfNe7f_8OZ1vQn0uhJkLs7Im0oI10LNrVtwxIdjXbGM" alt=""></div>
+                            <div><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQBn68qcHfNe7f_8OZ1vQn0uhJkLs7Im0oI10LNrVtwxIdjXbGM" alt=""></div>
+                            <div><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQBn68qcHfNe7f_8OZ1vQn0uhJkLs7Im0oI10LNrVtwxIdjXbGM" alt=""></div>
+                            <div><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQBn68qcHfNe7f_8OZ1vQn0uhJkLs7Im0oI10LNrVtwxIdjXbGM" alt=""></div>
+                            <div><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQBn68qcHfNe7f_8OZ1vQn0uhJkLs7Im0oI10LNrVtwxIdjXbGM" alt=""></div>
+                            <div><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQBn68qcHfNe7f_8OZ1vQn0uhJkLs7Im0oI10LNrVtwxIdjXbGM" alt=""></div>
+                        </div>
+                    </div>
+    
+                    <div class="inducere">
+                        <h2>Lorem ipsum dolor</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <div>
+                            <h3>Color</h3>
+                            <div>
+                                <button type="button">Blue</button>
+                                <button type="button">Red</button>
+                                <button type="button">Green</button>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Design</h3>
+                            <div>
+                                <button type="button">Classic</button>
+                                <button type="button">Mordern</button>
+                            </div>
+                        </div>
+
+                        <div class="price">
+                            <div><h3>Price</h3></div>
+                            <div><p>$129.01</p></div>
+                        </div>
+                        <div class="discount">
+                            <div><h3>Discount</h3></div>
+                            <div><p>10%</p></div>
+                        </div>
+                        <div><h3>Rating</h3></div>
+                        <div class="in-stocks">
+                            <div><h3>In Stocks</h3></div>
+                            <div><p>1004</p></div>
+                        </div>
+                        <div class="order">
+                            <div class="quantity"><input type="number" placeholder="0" min="0"></div>
+                            <div><button type="submit">Add to Cart</button></div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="comment">
+                   <h2>Comments</h2> 
+                   <div class="customer">
+                        <div class="customer-1">
+                            <div class="info">
+                                <div class="avatar-customer"></div>
+                                <div class="name">
+                                    <h4>Customer 1</h4>
+                                    <p><i>Ha Noi</i></p>
+                                </div>
+                            </div>
+                            <div class="evaluate">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="opinion">
+                            <p>2022-10-10 19:40:01</p>
+                            <p>sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
+                        </div>
+                   </div>
+    
+                    <div class="customer">
+                        <div class="customer-1">
+                            <div class="info">
+                                <div class="avatar-customer"></div>
+                                <div class="name">
+                                    <h4>Customer 1</h4>
+                                    <p><i>Ha Noi</i></p>
+                                </div>
+                            </div>
+                            <div class="evaluate">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+
+                        <div class="opinion">
+                            <p>2022-10-10 19:40:01</p>
+                            <p>sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page">
+                    <div><button type="button">1</button></div>
+                    <div><button type="button">2</button></div>
+                    <div><button type="button">3</button></div>
+                </div>
+
+                <div>
+                    <div class="footer">
+                        <h2>My Shop</h2>
+                        <div class="contact">
+                            <div><p><i class="fa fa-location-dot"></i>22C Somewhere, Ha Noi</p></div>
+                            <div><p><i class="fa fa-phone"></i>09876543210</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

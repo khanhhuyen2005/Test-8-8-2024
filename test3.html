@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            border: 2px solid #ff8400;
+            background-color: #fce3c8; 
+            padding: 10px;
+            align-items: center;
+        }
+
+        .head-left {
+            display: flex;
+            flex-direction: row;
+        }
+        .header  .one{
+            border: 2px solid #d48bf5;
+            background-color: #ecc4fe;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            margin-left: 30px;
+        }
+
+        .head-left h2 {
+            margin: 0;
+            margin-top: 8px;
+            font-family: sans-serif;
+            font-size: 20px;
+        }
+        
+
+        .head-right  a{
+            text-decoration: none;
+            padding: 10px 20px;
+            color: #101010;
+            border-radius: 4px;
+            font-family: sans-serif;
+        }
+
+        .head-right :hover {
+            border: 1px solid #009dff;
+            background-color: #95bcf0;
+        }
+
+        .header .nav-bars {
+            display: none;
+        }
+
+        @media (max-width: 1023px) {
+            .header .nav-bars {
+                display: block;
+            }
+
+            .head-right {
+                display: none;
+            }
+        }
+
+        .header .nav-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+
+        .header .nav-mobile {
+            position: fixed;
+            top: 5px;
+            right: 0;
+            bottom: 0;
+            width: 320px;
+            max-width: 100%;
+            background-color: #ffffff;
+            transform: translateX(100%);
+            transition: transform linear 0.2s;
+        }
+
+        .header .nav-mobile-link{
+            text-decoration: none;
+            padding: 10px 20px;
+            color: #101010;
+            border-radius: 4px;
+            font-family: sans-serif;
+            display: block;
+        }
+
+        .header .nav-mobile-close {
+            position: absolute;
+            font-size: 25px;
+            color: #898686;
+            top: 10px;
+            right: 20px;
+        }
+
+        .nav-input:checked ~ .nav-overlay {
+            display: block;
+        }
+
+        .nav-input {
+            display: none;
+        }
+
+        .nav-input:checked ~ .nav-mobile {
+            transform: translateX(0%);
+        }
+
+        .body {
+            display: flex;
+            flex-direction: column;
+            margin: 10px 60px;
+        }
+
+        .body h4 {
+            font-family: sans-serif;
+            margin-bottom: 10px;
+        }
+
+        .body .information {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .body .information .info {
+            border: 2px solid #8c8b8b;
+            width: 100%;
+            padding: 10px 40px;
+            
+        }
+
+        .body .information .info div {
+            margin-bottom: 15px;
+        }
+
+        .body .information .info label {
+           font-family: sans-serif; 
+           line-height: 30px;
+        }
+
+        .body .information .info input {
+            width: 95%;
+            height: 25px;
+            border: 2px solid #dddcdc;
+            border-radius: 5px;
+        }
+
+        .body .information .payment {
+            border: 2px solid #8c8b8b;
+            width: 100%;
+            padding: 20px 40px;
+        }
+
+        .body .information .payment label {
+            font-family: sans-serif;
+        }
+
+        .body .information .payment .method {
+            border: 2px solid #808080;
+            width: 95%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .body .cart {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .body .cart .box {
+            border: 2px solid;
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 20px;
+            padding-top: 15px;
+        }
+
+        .body .cart .box input[type=checkbox] {
+            margin-right: 10px;
+            margin-top: 40px;
+        }
+
+        .body .cart .box img {
+            width: 130px;
+            border: 2px solid #949494;
+            margin-right: 20px;
+        }
+
+        .body .cart .box .product {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .body .cart .box .product h3 {
+            font-family: sans-serif;
+            font-size: 25px;
+            margin-top: 10px;
+        }
+
+        .body .cart .box .product .feature {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .body .cart .box .product .feature button {
+            margin-right: 15px;
+            padding: 8px 24px;
+            border: 2px solid #1dbcbc;
+            border-radius: 5px;
+            background-color: #69e0e0;
+        }
+
+        .body .cart .box .product .feature button:hover {
+            background-color: #009dff;
+        }
+
+        .body .cart .box .product .quantity {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .body .cart .box .product .quantity input {
+            width: 50px;
+            padding: 10px;
+            margin-right: 10px;
+            border: 2px solid #a6a3a3;
+            border-radius: 5px;
+        }
+
+        .body .cart .box .product .quantity button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: 2px solid #fd7eb9;
+            border-radius: 5px;
+            background-color: #f6c1c9;
+        }
+
+        .body .cart .box .product h5 {
+            margin-top: 30px;
+            font-family: sans-serif;
+            font-size: 15px;
+        }
+
+        .body .submit {
+            margin-bottom: 20px;
+        }
+
+        .body .submit button {
+            padding: 10px 20px;
+            border: 2px solid #a881fe;
+            background-color: #becdfe;
+            border-radius: 5px;
+        }
+
+        .body .submit button:hover {
+            background-color: #d87093;
+        }
+
+        .footer{
+            border: 2px solid #ff8400;
+            background-color: #fce3c8; 
+            padding: 10px 0 0 60px;
+            margin: none;
+        }
+
+        .footer h2 {
+            margin: 0;
+        }
+
+        .footer .contact {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .footer .contact div {
+            margin-right: 50px;
+        }
+
+        .footer .contact i {
+            font-size: 20px;
+            padding-right: 10px;
+        }
+
+
+        @media (max-width:740px) {
+            .information {
+                display: flex;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width:1023px) {
+            .content {
+                width: 100%;
+            }
+
+            .body {
+                margin: 0 10px;
+            }
+
+        }
+
+        @media (max-width:730px) {
+            .body .cart .box {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .body .cart .box input[type=checkbox] {
+                margin-right: 230px;
+                margin-top: 0;
+            }
+
+            .body .cart .box .one h3 {
+                font-size: 15px;
+                margin-left: 22px;
+            }
+
+            .body .cart .box .product {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .body .cart .box button[type=button] {
+                padding: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <form action="">
+            <div class="container">
+                <div class="header">
+                    <div class="head-left">
+                        <div class="one"></div>
+                        <div><h2>My Shop</h2></div>
+                    </div>
+                    <nav class="nav-pc">
+                        <div class="head-right">
+                            <a href="#">Home</a>
+                            <a href="#">About us</a>
+                            <a href="#">Contact</a>
+                            <a href="#">My Cart</a>
+                        </div>
+                    </nav>
+                    <label class="nav-bars" for="nav-mobile-input"><i class="fa fa-bars"></i></label>
+    
+                    <input type="checkbox" 
+                    class="nav-input" id="nav-mobile-input" >
+                    <label class="nav-overlay" for="nav-mobile-input"></label>
+    
+                    <nav class="nav-mobile">
+                        <div class="head-right-mobile">
+                            <a href="#" class="nav-mobile-link">Home</a>
+                            <a href="#" class="nav-mobile-link">About us</a>
+                            <a href="#" class="nav-mobile-link">Contact</a>
+                            <a href="#" class="nav-mobile-link">My Cart</a>
+                        </div>
+                        <label class="nav-mobile-close"  for="nav-mobile-input"><i class="fas fa-times"></i></label>
+                    </nav>
+                </div>
+    
+                <div class="body">
+                    <div class="content">
+                        <h4>Your information</h4>
+                        <div class="information">
+                            <div class="info">
+                                <div class="name">
+                                    <label for="name">Full name</label><br>
+                                    <input type="text" id="name" required>
+                                </div>
+    
+                                <div class="tel">
+                                    <label for="tel">Phone number</label><br>
+                                    <input type="tel" id="tel" required>
+                                </div>
+    
+                                <div class="address">
+                                    <label for="adress">Address</label><br>
+                                    <input type="text" id="address" required>
+                                </div>
+                            </div>
+
+                            <div class="payment">
+                                <div>
+                                    <label for="pay">Payment method </label>
+                                    <div class="method"><input type="radio" id="pay" name="method"> Credit cart</div>
+                                    <div class="method"><input type="radio" id="pay" name="method"> Your bank</div>
+                                    <div class="method"><input type="radio" id="pay" name="method"> Momo</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cart">
+                        <h4>Cart</h4>
+                        <div class="box">
+                            <div><input type="checkbox"></div>
+                            <div>
+                                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQBn68qcHfNe7f_8OZ1vQn0uhJkLs7Im0oI10LNrVtwxIdjXbGM" alt="">
+                            </div>
+                            <div class="product">
+                                <div class="one"> 
+                                    <div><h3>Lorem ipsum dolor</h3></div>
+                                    <div class="feature">
+                                        <div><button type="button">Blue</button></div>
+                                        <div><button type="button">Classic</button></div>
+                                    </div>
+                                </div>
+
+                                <div class="order">
+                                    <div class="quantity">
+                                        <div><input type="number" placeholder="2" min="0"></div>
+                                        <div><button type="submit">Remove</button></div>
+                                    </div>
+                                    <div><h5>Total: $210</h5></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box">
+                            <div><input type="checkbox"></div>
+                            <div>
+                                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQBn68qcHfNe7f_8OZ1vQn0uhJkLs7Im0oI10LNrVtwxIdjXbGM" alt="">
+                            </div>
+                            <div class="product">
+                                <div class="one"> 
+                                    <div><h3>Lorem ipsum dolor</h3></div>
+                                    <div class="feature">
+                                        <div><button type="button">Blue</button></div>
+                                        <div><button type="button">Classic</button></div>
+                                    </div>
+                                </div>
+
+                                <div class="order">
+                                    <div class="quantity">
+                                        <div><input type="number" placeholder="2" min="0"></div>
+                                        <div><button type="submit">Remove</button></div>
+                                    </div>
+                                    <div><h5>Total: $210</h5></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box">
+                            <div><input type="checkbox"></div>
+                            <div>
+                                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQBn68qcHfNe7f_8OZ1vQn0uhJkLs7Im0oI10LNrVtwxIdjXbGM" alt="">
+                            </div>
+                            <div class="product">
+                                <div class="one"> 
+                                    <div><h3>Lorem ipsum dolor</h3></div>
+                                    <div class="feature">
+                                        <div><button type="button">Blue</button></div>
+                                        <div><button type="button">Classic</button></div>
+                                    </div>
+                                </div>
+
+                                <div class="order">
+                                    <div class="quantity">
+                                        <div><input type="number" placeholder="2" min="0"></div>
+                                        <div><button type="submit">Remove</button></div>
+                                    </div>
+                                    <div><h5>Total: $210</h5></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box">
+                            <div><input type="checkbox"></div>
+                            <div>
+                                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQBn68qcHfNe7f_8OZ1vQn0uhJkLs7Im0oI10LNrVtwxIdjXbGM" alt="">
+                            </div>
+                            <div class="product">
+                                <div class="one"> 
+                                    <div><h3>Lorem ipsum dolor</h3></div>
+                                    <div class="feature">
+                                        <div><button type="button">Blue</button></div>
+                                        <div><button type="button">Classic</button></div>
+                                    </div>
+                                </div>
+
+                                <div class="order">
+                                    <div class="quantity">
+                                        <div><input type="number" placeholder="2" min="0"></div>
+                                        <div><button type="submit">Remove</button></div>
+                                    </div>
+                                    <div><h5>Total: $210</h5></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="submit"><button type="submit">Submit Order</button></div>
+                </div>
+            </div>
+            <div class="footer">
+                <h2>My Shop</h2>
+                <div class="contact">
+                    <div><p><i class="fa fa-location-dot"></i>22C Somewhere, Ha Noi</p></div>
+                    <div><p><i class="fa fa-phone"></i>09876543210</p></div>
+                </div>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

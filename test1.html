@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            border: 2px solid #ff8400;
+            background-color: #fce3c8; 
+            padding: 10px;
+            align-items: center;
+        }
+
+        .head-left {
+            display: flex;
+            flex-direction: row;
+        }
+        .header  .one{
+            border: 2px solid #d48bf5;
+            background-color: #ecc4fe;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            margin-left: 30px;
+        }
+
+        .head-left h2 {
+            margin: 0;
+            margin-top: 8px;
+            font-family: sans-serif;
+            font-size: 20px;
+        }
+        
+
+        .head-right  a{
+            text-decoration: none;
+            padding: 10px 20px;
+            color: #101010;
+            border-radius: 4px;
+            font-family: sans-serif;
+        }
+
+        .head-right :hover {
+            border: 1px solid #009dff;
+            background-color: #95bcf0;
+        }
+
+        .header .nav-bars {
+            display: none;  
+        }
+
+        @media (max-width: 1023px) {
+            .header .nav-bars {
+                display: block;
+            }
+
+            .head-right {
+                display: none;
+            }
+        }
+
+        .header .nav-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+
+        .header .nav-mobile {
+            position: fixed;
+            top: 5px;
+            right: 0;
+            bottom: 0;
+            width: 320px;
+            max-width: 100%;
+            background-color: #ffffff;
+            transform: translateX(100%);
+            transition: transform linear 0.2s;
+        }
+
+        .header .nav-mobile-link{
+            text-decoration: none;
+            padding: 10px 20px;
+            color: #101010;
+            border-radius: 4px;
+            font-family: sans-serif;
+            display: block;
+        }
+
+        .header .nav-mobile-close {
+            position: absolute;
+            font-size: 25px;
+            color: #898686;
+            top: 10px;
+            right: 20px;
+        }
+
+        .nav-input:checked ~ .nav-overlay {
+            display: block;
+        }
+
+        .nav-input {
+            display: none;
+        }
+
+        .nav-input:checked ~ .nav-mobile {
+            transform: translateX(0%);
+        }
+
+
+        .body {
+            margin: 0 40px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .body .sidebar {
+            flex: 8%;
+            border: 2px solid;
+            margin: 20px;
+            padding: 15px;
+            height: 270px;
+            line-height: 28px;
+        }
+
+        .body .sidebar h5 {
+            font-family: sans-serif;
+            font-size: 18px;
+            margin: 0;
+        } 
+
+        .body .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .body .sidebar button {
+            padding: 6px 20px;
+            border: 2px solid #5bded1;
+            background-color: #99ead3;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .body .sidebar button:hover {
+            background-color: #b7de5b;
+        }
+
+
+        .body .sidebar-list {
+           font-size: 25px;
+           display: none;
+        }
+
+        @media (max-width:1023px) {
+            .body {
+                margin: 20px 10px;
+            }
+        }
+
+        @media (max-width:1023px) {
+            .body .sidebar-list {
+                display: block;
+            }
+            .sidebar {
+                display: none;
+            }
+        }
+
+        .sidebar-mobile {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 240px;
+            max-width: 100%;
+            background-color: #ffffff;
+            padding-left: 20px;
+            padding-top: 40px;
+            font-family: sans-serif;
+            transform: translateX(-100%);
+            transition: transform linear 0.2s;
+        }
+
+        .sidebar-mobile h5 {
+            font-family: sans-serif;
+            font-size: 18px;
+            margin: 0;
+        } 
+        .sidebar-mobile ul {
+            list-style-type: none;
+            margin-left: -20px;
+        }
+
+        .sidebar-mobile button {
+            padding: 6px 20px;
+            border: 2px solid #5bded1;
+            background-color: #99ead3;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .sidebar-mobile button:hover {
+            background-color: #b7de5b;
+        }
+
+        .body .sidebar-close {
+            position: absolute;
+            font-size: 25px;
+            color: #898686;
+            top: 10px;
+            right: 20px;
+        }
+        
+
+        .sidebar-input {
+            display: none;
+        }
+
+        .sidebar-input:checked ~ .sidebar-mobile {
+            transform: translateX(0%);
+        }
+
+        .body .content {
+            flex: 80%;
+            margin: 20px;
+        }
+
+        .body .content .search-box {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            border: 2px solid;
+            padding:15px;
+            padding-right: 40px;
+        }
+
+        .body .content .search-box input {
+            padding: 5px;
+            width: 400px;
+            border: none;
+        }
+
+        .body .content .search-box .search-container {
+            border: 2px solid #c4c4c4;
+            border-radius: 4px;
+        }
+
+        .body .content .search-box .search-container button {
+            border: none;
+            background-color: #ffffff;
+            margin-right: 7px;
+            color: #b1b0b0;
+            font-size: 16px;
+        }
+
+        .body .content .search-box select {
+            padding: 5px;
+            border: 2px solid #c4c3c3;
+            border-radius: 4px;
+            width: 100px;
+            margin-right: 15px;
+            color: #898686;
+        }
+
+        .search-checkbox {
+            display: none;
+            margin-top: -14px;
+            margin-left: 10px;
+        }
+
+        .search-input {
+            display: none;
+        }
+
+        @media (max-width:1023px) {
+            .search-checkbox {
+                display: block;
+            }
+
+            .search-container {
+                display: none;
+            }
+
+            .content {
+                width: 90%;
+            }
+
+            .sort-order-pc {
+                display: none;
+            }
+
+            .search {
+                margin-top: -25px;
+            }
+        }
+
+        .search-mobile {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 240px;
+            max-width: 100%;
+            background-color: #ffffff;
+            padding-left: 20px;
+            padding-top: 40px;
+            font-family: sans-serif;
+            transform: translateX(-100%);
+            transition: transform linear 0.2s;
+        }
+
+        .search-container-mobile {
+            border: 2px solid #c4c4c4;
+            border-radius: 4px;
+            margin-right: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-container-mobile button {
+            border: none;
+            background-color: #ffffff;
+            margin-right: 7px;
+            color: #b1b0b0;
+            font-size: 16px;
+        }
+
+        .search-mobile input {
+            padding: 5px;
+            border: none;
+        }
+
+        .search-mobile select {
+            padding: 5px;
+            border: 2px solid #c4c3c3;
+            border-radius: 4px;
+            width: 100px;
+            margin-right: 15px;
+            color: #898686;
+        }
+
+        .search-close {
+            position: absolute;
+            font-size: 25px;
+            color: #898686;
+            top: 0;
+            right: 0;
+        }
+
+        .search-input:checked ~ .search-mobile {
+            transform: translateX(0%);
+        }
+
+        .body .content .product {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        .body .content .product div {
+            justify-content: space-between;
+            margin-bottom: 20px;
+            width: 230px;
+        }
+
+        .body .content .product img {
+            border: 1px solid #a2a1a1;
+            width: 100%;
+        }
+
+        .body .content .product h4 {
+            font-family: sans-serif;
+            font-size: 15px;
+            margin-bottom: 0;
+            width: 200px;
+        }
+
+        .body .content .product .price {
+            display: flex;
+            flex-direction: row;
+            margin-right: 0;
+        }
+
+        .body .content .product .price i {
+            color: #0364e3;
+        }
+
+        .body .content .product .price select {
+            border: none;
+            color: #f53838;
+        }
+
+        @media (max-width:1023px) {
+            .body .content .product {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 25px;
+           }
+        }
+        .footer{
+            border: 2px solid #ff8400;
+            background-color: #fce3c8; 
+            padding: 10px 0 0 60px;
+        }
+
+        .footer h2 {
+            margin: 0;
+        }
+
+        .footer .contact {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .footer .contact div {
+            margin-right: 50px;
+        }
+
+        .footer .contact i {
+            font-size: 20px;
+            padding-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="header">
+                <div class="head-left">
+                    <div class="one"></div>
+                    <div><h2>My Shop</h2></div>
+                </div>
+                <nav class="nav-pc">
+                    <div class="head-right">
+                        <a href="#">Home</a>
+                        <a href="#">About us</a>
+                        <a href="#">Contact</a>
+                        <a href="#">My Cart</a>
+                    </div>
+                </nav>
+                <label class="nav-bars" for="nav-mobile-input"><i class="fa fa-bars"></i></label>
+
+                <input type="checkbox" 
+                class="nav-input" id="nav-mobile-input" >
+                <label class="nav-overlay" for="nav-mobile-input"></label>
+
+                <nav class="nav-mobile">
+                    <div class="head-right-mobile">
+                        <a href="#" class="nav-mobile-link">Home</a>
+                        <a href="#" class="nav-mobile-link">About us</a>
+                        <a href="#" class="nav-mobile-link">Contact</a>
+                        <a href="#" class="nav-mobile-link">My Cart</a>
+                    </div>
+                    <label class="nav-mobile-close"  for="nav-mobile-input"><i class="fas fa-times"></i></label>
+                </nav>
+            </div>
+
+            <div class="body">
+                <div class="left">
+                    <label class="sidebar-list" for="sidebar" ><i class="fa fa-ellipsis-h"></i></label>
+                    <input type="checkbox" id="sidebar" class="sidebar-input">
+                    <nav class="sidebar-pc">
+                        <div class="sidebar">
+                            <h5>Categories</h5>
+                            <ul>
+                                <li><input type="checkbox" >Devices</li>
+                                <li><input type="checkbox" >Funitures</li>
+                                <li><input type="checkbox" >Cloths</li>
+                                <li><input type="checkbox" >Foods & Drink</li>
+                                <li><input type="checkbox" >Materials</li>
+                                <li><input type="checkbox" >Computers</li>
+                            </ul>
+                            <form action=""><button type="submit">Show more ...</button></form>
+                        </div>
+                    </nav>
+                    
+                    <nav class="sidebar-mobile">
+                        <div>
+                            <h5>Categories</h5>
+                            <ul>
+                                <li><input type="checkbox" class="checkbox-link">Devices</li>
+                                <li><input type="checkbox" class="checkbox-link">Funitures</li>
+                                <li><input type="checkbox" class="checkbox-link">Cloths</li>
+                                <li><input type="checkbox" class="checkbox-link">Foods & Drink</li>
+                                <li><input type="checkbox" class="checkbox-link">Materials</li>
+                                <li><input type="checkbox" class="checkbox-link">Computers</li>
+                            </ul>
+                            <form action=""><button type="submit">Show more ...</button></form>
+                        </div>
+                        <label class="sidebar-close"  for="sidebar"><i class="fas fa-times"></i></label>
+                    </nav>
+                </div>
+
+                <div class="content">
+                    <label for="search-mobile" class="search-checkbox"><i class="fa fa-search"></i></label>
+                    <input type="checkbox" id="search-mobile" class="search-input">
+                    <nav class="search">
+                        <div class="search-box">
+                                <div class="search-container">
+                                    <form action="/action_page.php">
+                                      <input type="text" placeholder="Enter keyword to search" name="search">
+                                      <button type="submit"><i class="fa fa-search"></i></button>
+                                    </form>
+                                </div>
+                                <div class="sort-order-pc">
+                                    <select name="sort" id="sort" class="sort">
+                                        <option>Sort by</option>
+                                        <option></option>
+                                        <option></option>
+                                        <option></option>
+                                        <option></option>
+                                    </select>
+                                    <select name="order" id="order" class="order" >
+                                        <option>Order by</option>
+                                        <option></option>
+                                        <option></option>
+                                        <option></option>
+                                        <option></option>
+                                    </select>
+                                </div>
+                        </div>
+                    </nav>
+                    <nav class="search-mobile">
+                        <div>
+                            <div class="search-container-mobile">
+                                <form action="/action_page.php">
+                                  <input type="text" placeholder="Enter keyword to search" name="search">
+                                  <button type="submit"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                            <div class="sort-order-mobile">
+                                <select name="sort" id="sort" class="sort">
+                                    <option>Sort by</option>
+                                    <option></option>
+                                    <option></option>
+                                    <option></option>
+                                    <option></option>
+                                </select>
+                                <select name="order" id="order" class="order" >
+                                    <option>Order by</option>
+                                    <option></option>
+                                    <option></option>
+                                    <option></option>
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <label class="search-close"  for="search-mobile"><i class="fas fa-times"></i></label>
+                    </nav>
+                        
+
+                    <div class="product">
+                        <div>
+                            <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSO6Dc2PSKpEgnu6FkOGg3YuWGRbl7k5VFdY38fIdeL62YYU02o" alt="">
+                            <h4>Lorem ipsum dolor</h4>
+                            <div class="price">
+                                <p><i>$129.01</i></p>
+                                <select name="%" id="%">
+                                    <option value="">10%</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSO6Dc2PSKpEgnu6FkOGg3YuWGRbl7k5VFdY38fIdeL62YYU02o" alt="">
+                            <h4>Lorem ipsum dolor</h4>
+                            <div class="price">
+                                <p><i>$129.01</i></p>
+                                <select name="%" id="%">
+                                    <option value="">10%</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSO6Dc2PSKpEgnu6FkOGg3YuWGRbl7k5VFdY38fIdeL62YYU02o" alt="">
+                            <h4>Lorem ipsum dolor</h4>
+                            <div class="price">
+                                <p><i>$129.01</i></p>
+                                <select name="%" id="%">
+                                    <option value="">10%</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSO6Dc2PSKpEgnu6FkOGg3YuWGRbl7k5VFdY38fIdeL62YYU02o" alt="">
+                            <h4>Lorem ipsum dolor</h4>
+                            <div class="price">
+                                <p><i>$129.01</i></p>
+                                <select name="%" id="%">
+                                    <option value="">10%</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSO6Dc2PSKpEgnu6FkOGg3YuWGRbl7k5VFdY38fIdeL62YYU02o" alt="">
+                            <h4>Lorem ipsum dolor</h4>
+                            <div class="price">
+                                <p><i>$129.01</i></p>
+                                <select name="%" id="%">
+                                    <option value="">10%</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSO6Dc2PSKpEgnu6FkOGg3YuWGRbl7k5VFdY38fIdeL62YYU02o" alt="">
+                            <h4>Lorem ipsum dolor</h4>
+                            <div class="price">
+                                <p><i>$129.01</i></p>
+                                <select name="%" id="%">
+                                    <option value="">10%</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSO6Dc2PSKpEgnu6FkOGg3YuWGRbl7k5VFdY38fIdeL62YYU02o" alt="">
+                            <h4>Lorem ipsum dolor</h4>
+                            <div class="price">
+                                <p><i>$129.01</i></p>
+                                <select name="%" id="%">
+                                    <option value="">10%</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSO6Dc2PSKpEgnu6FkOGg3YuWGRbl7k5VFdY38fIdeL62YYU02o" alt="">
+                            <h4>Lorem ipsum dolor</h4>
+                            <div class="price">
+                                <p><i>$129.01</i></p>
+                                <select name="%" id="%">
+                                    <option value="">10%</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="footer">
+                    <h2>My Shop</h2>
+                    <div class="contact">
+                        <div><p><i class="fa fa-location-dot"></i>22C Somewhere, Ha Noi</p></div>
+                        <div><p><i class="fa fa-phone"></i>09876543210</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
